@@ -1,28 +1,42 @@
-from models import Pessoas, db_session
+from models import Pessoas, Usuarios
 
+# Insere dados na tabela pessoa
 def insere_pessoas():
-    pessoa = Pessoas(nome='Silva', idade=24)
+    pessoa = Pessoas(nome='Galleani',idade=25)
     print(pessoa)
-    db_session.add(pessoa)
-    db_session.commit()
+    pessoa.save()
 
+# Realiza consulta na tabela pessoa
 def consulta_pessoas():
-    pessoa = Pessoas.query.all()
-    print(pessoa)
-    #pessoa = Pessoas.query.filter_by(nome='Otavio').first()
-    #print(pessoa.idade)
+    pessoas = Pessoas.query.all()
+    print(pessoas)
+    pessoa = Pessoas.query.filter_by(nome='Rafael').first()
+    print(pessoa.idade)
 
-def altera_pessoas():
-    pessoa = Pessoas.query.filter_by(nome='Bitencourt').first()
+# Altera dados na tabela pessoa
+def altera_pessoa():
+    pessoa = Pessoas.query.filter_by(nome='Galleani').first()
     pessoa.nome = 'Felipe'
     pessoa.save()
 
+# Exclui dados na tabela pessoa
 def exclui_pessoa():
-    pessoa = Pessoas.query.filter_by(nome='Silva').first()
+    pessoa = Pessoas.query.filter_by(nome='Felipe').first()
     pessoa.delete()
 
+def insere_usuario(login, senha):
+    usuario = Usuarios(login=login, senha=senha)
+    usuario.save()
+
+def consulta_todos_usuarios():
+    usuarios = Usuarios.query.all()
+    print(usuarios)
+
 if __name__ == '__main__':
+    insere_usuario('Otavio', '1234')
+    insere_usuario('Bitencourt', '4321')
+    consulta_todos_usuarios()
     #insere_pessoas()
-    #altera_pessoas()
+    #altera_pessoa()
     #exclui_pessoa()
-    consulta_pessoas()
+    #consulta_pessoas()
