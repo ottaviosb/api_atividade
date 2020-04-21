@@ -19,10 +19,10 @@ api = Api(app)
 #        return USUARIOS.get(login) == senha
 
 @auth.verify_password
-    def verificacao(login, senha):
-        if not (login, senha):
-            return False
-        return Usuarios.query.filter_by(login=login, senha=senha).first()
+def verificacao(login, senha):
+    if not (login, senha):
+        return False
+    return Usuarios.query.filter_by(login=login, senha=senha).first()
 
 class Pessoa(Resource):
     @auth.login_required
